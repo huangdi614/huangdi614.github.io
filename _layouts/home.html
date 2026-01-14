@@ -1,0 +1,52 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- if site.posts.size > 0 -%}
+    <section class="post-list">
+      <h2 class="post-list-heading">{{ page.list_title | default: "最新文章" }}</h2>
+      <div class="post-grid">
+        {%- for post in site.posts limit: 6 -%}
+          <article class="post-preview">
+            <div class="post-meta">
+              <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%Y年%m月%d日" }}
+              </time>
+              {%- if post.categories.size > 0 -%}
+                <span class="post-categories">
+                  {%- for category in post.categories -%}
+                    <span class="category-tag">{{ category }}</span>
+                  {%- endfor -%}
+                </span>
+              {%- endif -%}
+            </div>
+            <h3 class="post-title">
+              <a class="post-link" href="{{ post.url | relative_url }}">
+                {{ post.title | escape }}
+              </a>
+            </h3>
+            {%- if post.excerpt -%}
+              <p class="post-excerpt">
+                {{ post.excerpt | strip_html | truncatewords: 30 }}
+              </p>
+            {%- endif -%}
+            <a class="read-more" href="{{ post.url | relative_url }}">阅读更多 →</a>
+          </article>
+        {%- endfor -%}
+      </div>
+      {%- if site.posts.size > 6 -%}
+        <div class="view-all-posts">
+          <a href="/archive/" class="view-all-link">查看所有文章</a>
+        </div>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
+
+</div>

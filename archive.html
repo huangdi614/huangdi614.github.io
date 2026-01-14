@@ -1,0 +1,44 @@
+---
+layout: page
+title: 文章归档
+permalink: /archive/
+---
+
+<div class="archive">
+  {%- assign posts_by_year = site.posts | group_by_exp: 'post', 'post.date | date: "%Y"' -%}
+
+  {%- for year_group in posts_by_year -%}
+    <div class="year-section">
+      <h2 class="year-title">{{ year_group.name }} 年</h2>
+      <div class="posts-by-year">
+        {%- assign posts_by_month = year_group.items | group_by_exp: 'post', 'post.date | date: "%m"' -%}
+        {%- for month_group in posts_by_month -%}
+          <div class="month-section">
+            <h3 class="month-title">{{ month_group.name | prepend: "20" | date: "%B" }}</h3>
+            <ul class="post-list-month">
+              {%- for post in month_group.items -%}
+                <li class="post-item">
+                  <time class="post-day" datetime="{{ post.date | date_to_xmlschema }}">
+                    {{ post.date | date: "%d" }}日
+                  </time>
+                  <div class="post-info">
+                    <h4 class="post-title-small">
+                      <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+                    </h4>
+                    {%- if post.categories.size > 0 -%}
+                      <div class="post-categories-small">
+                        {%- for category in post.categories -%}
+                          <span class="category-tag-small">{{ category }}</span>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endfor -%}
+</div>

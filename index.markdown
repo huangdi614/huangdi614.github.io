@@ -1,6 +1,7 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: home
+title: "欢迎来到清哥的博客"
+list_title: "最新文章"
 ---
+
+专注记录分享通过认知科学构建大模型及智能体的技术洞察与实践经验。
