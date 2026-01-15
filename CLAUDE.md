@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a Jekyll-based static site for a blog called "清哥的博客" (Albert's Blog), focusing on cognitive science, large language models, and AI agents. The site is hosted on GitHub Pages with the base URL "/blog".
+This is a Jekyll-based static site for a blog called "清哥的博客" (Albert's Blog), focusing on cognitive science, large language models, and AI agents. The site is hosted on GitHub Pages with the base URL "".
 
 ## Architecture & Structure
 
@@ -70,7 +70,7 @@ The site is configured in `_config.yml` with:
 - Title: "清哥的博客"
 - Email: albert.huangdi@gmail.com
 - Description: "专注记录分享通过认知科学构建大模型及智能体" (Focused on recording and sharing cognitive science-based construction of large models and intelligent agents)
-- Base URL: "/blog"
+- Base URL: ""
 - Theme: "minima"
 - Plugins: jekyll-feed
 

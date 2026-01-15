@@ -49,7 +49,7 @@ bundle install
 # 启动开发服务器
 bundle exec jekyll serve
 
-# 访问 http://localhost:4000/blog/
+# 访问 http://localhost:4000/
 ```
 
 ### 构建站点
