@@ -22,7 +22,7 @@ title: 清哥的博客
 email: albert.huangdi@gmail.com
 description: 专注记录分享通过认知科学构建大模型及智能体
 baseurl: "/blog" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://huangdi614.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: albert_huangdi
 github_username:  huangdi614
 
