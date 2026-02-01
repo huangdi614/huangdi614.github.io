@@ -592,11 +592,3 @@ Nested Learning论文为我们提供了一个革命性的视角来理解深度�
 随着大语言模型和人工智能技术的快速发展,持续学习、长上下文理解、样本效率等问题变得越来越重要。嵌套学习范式为解决这些挑战提供了一个有前景的方向。未来的研究将会告诉我们,这一范式能否真正推动AI系统向更接近人类智能的方向发展。
 
 正如爱因斯坦所说:"我们无法用制造问题时的思维方式来解决问题。" 嵌套学习正是这样一种新的思维方式——它不是简单地在现有框架内寻求改进,而是重新审视和重构我们对深度学习本质的理解。这种范式转变的影响,可能远超我们目前的想象。
-
-[Titans_ Learning to Memorize at Test Time](https://www.notion.so/Titans_-Learning-to-Memorize-at-Test-Time-2fa6db94c8d780e6906be15443f46237?pvs=21)
-
-[google Nested Learning The Illusion of Deep Learning Architecture 论文解读](https://www.notion.so/google-Nested-Learning-The-Illusion-of-Deep-Learning-Architecture-2fa6db94c8d780a08d6feff674331a92?pvs=21)
-
-[Nested Learning_ The Illusion of Deep Learning Architecture](https://www.notion.so/Nested-Learning_-The-Illusion-of-Deep-Learning-Architecture-2ef6db94c8d78079928add9caf480e64?pvs=21)
-
-[Nested Learning笔记](https://www.notion.so/Nested-Learning-2f26db94c8d78021883cdbe1978d7c5a?pvs=21)
