@@ -34,7 +34,7 @@ categories: 大模型 AI 人工智能
 
 不同频率决定了大脑神经元群体激活和共享更新信息的频率。这种多时间尺度的设计使得大脑能够同时处理即时信息和长期记忆。
 
-![截屏2026-02-01 19.35.30.png](/assets/images/posts/nested-learning/%E5%B5%8C%E5%A5%97%E5%AD%A6%E4%B9%A0%20%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9E%B6%E6%9E%84%E7%9A%84%E5%B9%BB%E8%B1%A1%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB/%E6%88%AA%E5%B1%8F2026-02-01_19.35.30.png)
+![截屏2026-02-01 19.35.30.png](/assets/images/posts/nested-learning/2026-02-01_19.35.30.png)
 
 ### 1.2 记忆的在线和离线巩固
 
@@ -282,7 +282,7 @@ Hope将Self-Referential Titans和CMS结合起来:
 
 `高频层(Titans) ←→ 中频层(CMS块1) ←→ 低频层(CMS块2) ←→ ...`
 
-![截屏2026-02-01 22.15.32.png](/assets/images/posts/nested-learning/%E5%B5%8C%E5%A5%97%E5%AD%A6%E4%B9%A0%20%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9E%B6%E6%9E%84%E7%9A%84%E5%B9%BB%E8%B1%A1%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB/%E6%88%AA%E5%B1%8F2026-02-01_22.15.32.png)
+![截屏2026-02-01 22.15.32.png](/assets/images/posts/nested-learning/2026-02-01_22.15.32.png)
 
 ### 4.4 M3优化器:CMS在优化中的应用
 
@@ -317,7 +317,7 @@ M3展示了连续记忆系统不仅适用于模型架构,也适用于优化算�
 
 ### M3算法详细说明
 
-![截屏2026-02-01 22.25.00.png](/assets/images/posts/nested-learning/%E5%B5%8C%E5%A5%97%E5%AD%A6%E4%B9%A0%20%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9E%B6%E6%9E%84%E7%9A%84%E5%B9%BB%E8%B1%A1%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB/%E6%88%AA%E5%B1%8F2026-02-01_22.25.00.png)
+![截屏2026-02-01 22.25.00.png](/assets/images/posts/nested-learning/2026-02-01_22.25.00.png)
 
 ### 算法概述
 
@@ -519,7 +519,7 @@ Titans架构中的长期记忆模块就是这种思想的体现。
 
 这些结果验证了嵌套学习范式在实际任务中的有效性。
 
-![截屏2026-02-01 22.42.43.png](/assets/images/posts/nested-learning/%E5%B5%8C%E5%A5%97%E5%AD%A6%E4%B9%A0%20%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9E%B6%E6%9E%84%E7%9A%84%E5%B9%BB%E8%B1%A1%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB/%E6%88%AA%E5%B1%8F2026-02-01_22.42.43.png)
+![截屏2026-02-01 22.42.43.png](/assets/images/posts/nested-learning/2026-02-01_22.42.43.png)
 
 ### 8.2 长上下文理解
 
@@ -531,7 +531,7 @@ Titans架构中的长期记忆模块就是这种思想的体现。
 
 这表明多层级记忆系统确实能够更好地管理和利用长期信息。
 
-![截屏2026-02-01 22.44.58.png](/assets/images/posts/nested-learning/%E5%B5%8C%E5%A5%97%E5%AD%A6%E4%B9%A0%20%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9E%B6%E6%9E%84%E7%9A%84%E5%B9%BB%E8%B1%A1%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB/%E6%88%AA%E5%B1%8F2026-02-01_22.44.58.png)
+![截屏2026-02-01 22.44.58.png](/assets/images/posts/nested-learning/2026-02-01_22.44.58.png)
 
 ### 8.3 持续学习能力
 
@@ -543,7 +543,7 @@ Titans架构中的长期记忆模块就是这种思想的体现。
 
 这些结果表明,通过引入中间频率层级和连续记忆系统,模型获得了更好的持续学习能力。
 
-![截屏2026-02-01 22.48.12.png](/assets/images/posts/nested-learning/%E5%B5%8C%E5%A5%97%E5%AD%A6%E4%B9%A0%20%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%9E%B6%E6%9E%84%E7%9A%84%E5%B9%BB%E8%B1%A1%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB/%E6%88%AA%E5%B1%8F2026-02-01_22.48.12.png)
+![截屏2026-02-01 22.48.12.png](/assets/images/posts/nested-learning/2026-02-01_22.48.12.png)
 
 ## 九、理论意义与未来方向
 
