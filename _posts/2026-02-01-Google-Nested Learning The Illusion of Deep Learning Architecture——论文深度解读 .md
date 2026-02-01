@@ -1,4 +1,11 @@
-# 嵌套学习:深度学习架构的幻象——论文深度解读
+---
+layout: post
+title: "Nested Learning: The Illusion of Deep Learning Architecture——google论文深度解读"
+date: 2026-02-01 08:00:00 +0800
+categories: 大模型 AI 人工智能
+---
+
+# Nested Learning: The Illusion of Deep Learning Architecture——google论文深度解读
 
 > 论文原文：[https://arxiv.org/pdf/2512.24695](https://arxiv.org/pdf/2512.24695)
 > 
