@@ -1,16 +1,16 @@
 ---
 categories: AI Agent Vibe Coding 工程实践
 layout: post
-title: "Vibe Coding 时，如何缓解与 Agent 的认知偏差"
+title: "Vibe Coding 最贵的 Bug：你和 Agent 以为在做同一个项目"
 date: 2026-10-28 08:00:00 +0800
-description: 从目标、上下文、计划、验收与可观测性五个层面，讨论如何在 vibe coding 中尽早发现人与 Agent 的认识差异，并识别 loop 中不断累积的四种沉默成本。
+description: Agent 说“完成了”，不等于你们解决了同一个问题。本文拆解认知偏差、可观测性与四种沉默成本，给出一套可执行的对齐闭环。
 tags:
   - AI
   - Agent
   - Vibe Coding
   - 认知偏差
 ---
-# Vibe Coding 时，如何缓解与 Agent 的认知偏差
+# Vibe Coding 最贵的 Bug：你和 Agent 以为在做同一个项目
 
 > 先说结论：缓解认知偏差，关键不是让 Agent 更会猜，而是减少那些只能靠猜的部分。把目标、约束、成功标准和未知项外化成可检查的接口，让分歧在计划阶段暴露，而不是等系统已经跑偏之后再靠返工纠错。
 
