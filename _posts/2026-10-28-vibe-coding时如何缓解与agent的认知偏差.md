@@ -65,7 +65,9 @@ Spec 的写作可以交给 Agent，Spec 的判断不能。要让审阅真的发�
 - 详细规范放 docs/spec-format.md，入口文件只保留链接和适用条件。
 ```
 
-[AGENTS.md 官方格式](../external-sources/agents-md-official-format.md)把它定位成“给 Agent 的 README”，也支持在 monorepo 里用嵌套文件让最近的一层指令覆盖。按这个定位，入口只该放项目概览、执行命令、真正全局的硬约束和阅读路由；具体格式、图表示例和领域规范按任务按需加载。
+[AGENTS.md 官方格式](../external-sources/agents-md-official-format.md)把它定位成“给 Agent 的 README”。[OpenAI Codex 的官方文档](../external-sources/openai-codex-agents-md.md)进一步说明了加载顺序：Codex 从全局和项目路径构建 instruction chain，目录越近的规则越靠后，并覆盖更早的指导；所有文件合并后默认受 32 KiB 上限约束，超出时官方建议拆分到嵌套目录或提高上限。
+
+按这个机制，入口只该放项目概览、执行命令、真正全局的硬约束和阅读路由；具体格式、图表示例和领域规范按任务按需加载。
 
 长上下文也不会因为窗口够大就被完整利用。[《Lost in the Middle》](../external-sources/lost-in-the-middle.md)在两类检索任务中发现，相关信息出现在开头或结尾时，模型通常表现更好；落在长上下文中间时，表现会明显下降。所以重要规则要靠近开头或结尾，剩下的细节拆出去。把几百行内容塞进入口，效果不是 Agent 看得更多，而是容易把真正重要的规则埋掉。
 
