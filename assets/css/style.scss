@@ -948,6 +948,18 @@ input:checked + .slider:before {
   font-style: italic;
 }
 
+/* Mermaid diagrams */
+.post-content .mermaid {
+  margin: 2rem 0;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.post-content .mermaid svg {
+  height: auto;
+  max-width: 100%;
+}
+
 /* Archive page styles */
 .archive {
   max-width: 800px;

@@ -3,7 +3,7 @@ categories: AI Agent Vibe Coding 工程实践
 layout: post
 title: "Vibe Coding 最贵的 Bug：你和 Agent 以为在做同一个项目"
 date: 2026-10-28 08:00:00 +0800
-description: Agent 写 Spec 的速度越来越快，人也越来越容易从作者退成审阅者。文章从 Spec 审阅和隐性知识传递出发，结合自主等级研究，讨论研发怎样从辅助走向全自动。
+description: Agent 写 Spec 的速度越来越快，人也越来越容易从作者退成审阅者。文章从 Spec 审阅、项目文档分层和隐性知识传递出发，讨论研发怎样从辅助走向全自动。
 tags:
   - AI
   - Agent
@@ -60,9 +60,11 @@ Spec 的写作可以交给 Agent，Spec 的判断不能。要让审阅真的发�
 - 开头先写 What、Why、Impact，再按决策点展开。
 - 调用链、数据流、状态和依赖优先画 Mermaid 图。
 - 未决事项标为 UNKNOWN，确认前不得进入实现。
-- 关键决策写入 docs/decisions/，实现变化写入 docs/notes/。
-- 新任务开始前，先读相关 decision 和最新 note。
-- 详细规范放 docs/spec-format.md，入口文件只保留链接和适用条件。
+- 项目上下文读 docs/architecture.md、data-model.md、design.md。
+- 需求按 specs/<requirement>/spec.md → plan.md → tasks.md 推进。
+- 每个需求的实现与决策写入 .agents/note/<requirement>.md。
+- 完成后的可读设计说明输出到 artifacts/<requirement>/design.html。
+- 新任务开始前，先读项目地图、当前 Spec 和上一轮 note。
 ```
 
 [AGENTS.md 官方格式](../external-sources/agents-md-official-format.md)把它定位成“给 Agent 的 README”。[OpenAI Codex 的官方文档](../external-sources/openai-codex-agents-md.md)进一步说明了加载顺序：Codex 从全局和项目路径构建 instruction chain，目录越近的规则越靠后，并覆盖更早的指导；所有文件合并后默认受 32 KiB 上限约束，超出时官方建议拆分到嵌套目录或提高上限。
@@ -83,23 +85,41 @@ Spec 的写作可以交给 Agent，Spec 的判断不能。要让审阅真的发�
 
 下一轮接手的人或 Agent 至少要知道当前 Spec 是哪一版，关键决定是什么，哪些假设还没有验证，失败时看到了什么证据，以及哪些问题被明确留给了后续。
 
-靠不断在 prompt 里补“我们这个项目还有一条隐形规则”解决不了这个问题。对话会结束，后来接手的 Agent 只看到剩下的文件和上下文。更可靠的做法，是把两类信息拆开记录：
+靠不断在 prompt 里补“我们这个项目还有一条隐形规则”解决不了这个问题。对话会结束，后来接手的 Agent 只看到剩下的文件和上下文。我现在把项目文档分成四层：
 
-| 文档 | 记录什么 | 什么时候更新 |
-| --- | --- | --- |
-| decision | 问题、备选方案、最终选择、理由、证据、影响和复查条件 | 每次影响范围、架构、数据或风险的决策发生时 |
-| note | 实际改了什么、与 Spec 的偏差、失败尝试、验证结果、遗留风险和下一步 | 每个实现检查点完成时 |
+```text
+AGENTS.md                         入口与阅读路由
+docs/
+  architecture.md                 模块划分、职责、依赖，项目地图
+  data-model.md                   实体、关系、约束与不变量
+  design.md                       项目主体设计、核心流程与取舍
+specs/<requirement>/
+  spec.md                         What / Why / Impact
+  plan.md                         实施路径与影响范围
+  tasks.md                        可验证的任务拆分
+.agents/note/<requirement>.md     每个需求的实现过程与决策
+artifacts/<requirement>/
+  design.html                     面向人的需求设计说明
+```
 
-decision 回答“为什么这样做”，note 回答“最后做成了什么、过程中发生了什么”。两者不要揉成一份事后总结。决策发生时就写，能保留当时的备选方案和约束；实现过程中持续补 note，才不会把临时绕路和未验证假设伪装成最终设计。
+`architecture`、`data model` 和 `design` 是长期上下文。它们不跟每次需求一起膨胀，而是在模块职责、数据边界或主体设计真的变化时更新。Agent 每次接手先读这张项目地图，再决定应该进入哪些模块。
+
+`spec`、`plan`、`tasks` 是需求层。Spec 负责定义 What、Why、Impact；Plan 说明改动路径、影响和验证方式；Tasks 把工作拆成能够逐项验收的单元。Superpowers 驱动的这套流程，重点不在帮你多写三份文档，而在把一个大需求变成连续、可检查的决策链。
+
+每个需求的实施记录放进借鉴自 DeepSeek harness 的 `.agents/note/<requirement>.md`。这里记实际做了什么、为什么这样选、哪些方案被放弃、在哪里偏离了 Spec、验证结果如何、还留下哪些风险。它不是项目结束后的回忆录，而应该在需求推进过程中持续更新，最后自然成为下一次交接的上下文。
+
+`artifacts/<requirement>/design.html` 不是另一份 source of truth，而是把架构、数据模型、Spec、Plan 和 Note 重新组织成给人看的需求设计页。模块图、数据流、状态变化、关键取舍和验收结果放图中，详细信息按需展开。人审阅这样的 HTML，比在几千行 Markdown 里寻找逻辑轻松得多。HTML 可以重新生成，底下的 Markdown 和代码才是依据。
 
 ```mermaid
 flowchart LR
-    A[Spec: What / Why / Impact] --> B[decision: 为什么这样选]
-    B --> C[note: 实际怎么实现]
-    C --> D[下一轮 Agent: 上下文、证据与遗留项]
+    A[AGENTS.md: 阅读路由] --> B[架构 / 数据模型 / 主体设计]
+    B --> C[Spec → Plan → Tasks]
+    C --> D[.agents/note: 实现与决策]
+    D --> E[artifacts/design.html: 人读视图]
+    D --> F[下一轮 Agent]
 ```
 
-目录可以简单到 `docs/decisions/<topic>.md` 和 `docs/notes/<change>.md`。`AGENTS.md` 只写这两类文档何时必读、模板在哪里，不把每份决策全文塞进入口文件。新的 Agent 开始工作前，先读相关 decision 和最新 note，再读代码。这样它拿到的不是一段无法复现的聊天记忆，而是一条可以追溯的判断链。
+新的 Agent 开始工作前，先读项目地图、当前 Spec 和相关 Note，再读代码。人需要做设计审阅时先打开 HTML artifact。两种输入面对两类读者：Agent 拿结构化上下文，人拿低认知负担的可视化说明。
 
 Anthropic 的[《Effective harnesses for long-running agents》](../external-sources/anthropic-effective-harnesses-for-long-running-agents.md)把长任务比作工程师轮班：每个新会话都没有上一班的记忆，单靠 compaction 也不一定能把事情交接清楚。它的做法是让 Agent 用进度文件、功能清单和 git 历史重建状态，再在每个会话结束时留下可恢复的成果。
 
@@ -133,12 +153,13 @@ L5 听起来最接近你说的全自动研发。按论文定义，人在这个�
 
 ## 四、压缩后的协作流程
 
-1. 先按任务风险和可回滚程度，定这一轮允许 Agent 跑到哪一级。
-2. 人写决定单，说清问题、非目标、硬约束、验收尺度和未知项。
-3. Agent 先交一页决策骨架，不直接生成完整 Spec。
-4. 人只审目标、约束、关键例子和方案分歧，未解决项不能直接进入实现。
-5. 实现按概念关口推进，每一段都要求 Agent 解释关键路径和失败边界。
-6. 每轮结束写决策台账，下一次交给新的 Agent 前收成一份交接包。
+1. 按任务风险和可回滚程度，先定这一轮允许 Agent 跑到哪一级。
+2. 人写决定单，Agent 同时读取 `architecture`、`data model` 和 `design`。
+3. Superpowers 生成需求的 `spec`、`plan`、`tasks`，并据此产出第一版 `design.html`。
+4. 人审 HTML 中的目标、影响、关键图和方案分歧，未解决项不能进入实现。
+5. 按 Task 小步实现，每个值得复查的决定及时写进 `.agents/note`。
+6. 做验收和解释回放，把失败路径、验证证据和遗留风险补进 Note。
+7. 如果模块职责、数据边界或主体设计发生变化，再更新长期文档并重新生成 `design.html`。
 
 流程真正减少的是重复阅读。文档数量未必会少，人却不必再把 Agent 生成的每一段话都当成阅读理解。最难的判断仍然要人看，这也是留下审阅者的意义。
 

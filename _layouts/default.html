@@ -18,6 +18,49 @@
     <!-- Dark mode toggle script -->
     <script src="{{ "/assets/js/dark-mode.js" | relative_url }}"></script>
 
+    <!-- Mermaid diagrams -->
+    <script type="module">
+      const mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
+
+      if (mermaidBlocks.length > 0) {
+        const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+        const diagrams = [];
+
+        mermaidBlocks.forEach((codeBlock) => {
+          const container = document.createElement('div');
+          container.className = 'mermaid';
+          container.dataset.source = codeBlock.textContent;
+          container.textContent = codeBlock.textContent;
+          codeBlock.parentElement.replaceWith(container);
+          diagrams.push(container);
+        });
+
+        const renderDiagrams = async () => {
+          const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
+
+          mermaid.initialize({
+            startOnLoad: false,
+            securityLevel: 'strict',
+            theme
+          });
+
+          diagrams.forEach((diagram) => {
+            diagram.removeAttribute('data-processed');
+            diagram.textContent = diagram.dataset.source;
+          });
+
+          await mermaid.run({ nodes: diagrams });
+        };
+
+        await renderDiagrams();
+
+        new MutationObserver(renderDiagrams).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['data-theme']
+        });
+      }
+    </script>
+
   </body>
 
 </html>
