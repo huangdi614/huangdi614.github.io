@@ -65,7 +65,9 @@ Spec 的写作可以交给 Agent，Spec 的判断不能。要让审阅真的发�
 - 详细规范放 docs/spec-format.md，入口文件只保留链接和适用条件。
 ```
 
-这背后是[《第四讲. 拆分思路》](../external-sources/lecture-04-how-to-split-agents-instructions.md)的原则：常用信息放在入口，偶尔用的信息收进专题文档，用不上的不要带。`AGENTS.md` 控制在几十到两百行，作为项目管理入口和阅读路由；具体格式、图表示例和领域规范按需加载。把每次都要看的规则留在入口，把几百行细节塞进去，反而会把真正重要的内容埋掉。
+[AGENTS.md 官方格式](../external-sources/agents-md-official-format.md)把它定位成“给 Agent 的 README”，也支持在 monorepo 里用嵌套文件让最近的一层指令覆盖。按这个定位，入口只该放项目概览、执行命令、真正全局的硬约束和阅读路由；具体格式、图表示例和领域规范按任务按需加载。
+
+长上下文也不会因为窗口够大就被完整利用。[《Lost in the Middle》](../external-sources/lost-in-the-middle.md)在两类检索任务中发现，相关信息出现在开头或结尾时，模型通常表现更好；落在长上下文中间时，表现会明显下降。所以重要规则要靠近开头或结尾，剩下的细节拆出去。把几百行内容塞进入口，效果不是 Agent 看得更多，而是容易把真正重要的规则埋掉。
 
 ## 二、真正的隐性知识，正在从执行过程中长出来
 
@@ -97,7 +99,9 @@ flowchart LR
 
 目录可以简单到 `docs/decisions/<topic>.md` 和 `docs/notes/<change>.md`。`AGENTS.md` 只写这两类文档何时必读、模板在哪里，不把每份决策全文塞进入口文件。新的 Agent 开始工作前，先读相关 decision 和最新 note，再读代码。这样它拿到的不是一段无法复现的聊天记忆，而是一条可以追溯的判断链。
 
-[《第十一讲. 让 agent 的运行过程可观测》](../external-sources/lecture-11-why-observability-belongs-inside-the-harness.md)把它们分成两类信号：日志、追踪和错误上下文回答系统实际做了什么；合同、Plan、评分标准和人的决定回答为什么这个结果值得接受。前者查运行状态，后者查判断过程。只看其中一边，依然会掉进猜测。
+Anthropic 的[《Effective harnesses for long-running agents》](../external-sources/anthropic-effective-harnesses-for-long-running-agents.md)把长任务比作工程师轮班：每个新会话都没有上一班的记忆，单靠 compaction 也不一定能把事情交接清楚。它的做法是让 Agent 用进度文件、功能清单和 git 历史重建状态，再在每个会话结束时留下可恢复的成果。
+
+[《Harness design for long-running application development》](../external-sources/anthropic-harness-design-long-running-apps.md)又往前走了一步：生成者和评估者在写代码前协商 sprint contract，并通过文件读写来传递判断。日志、追踪和错误上下文只能回答系统实际做了什么；Spec、decision、note 和验收证据才能回答为什么这样做、当时发生了什么。只看其中一边，依然会掉进猜测。
 
 因此，记录不能依赖 Agent 事后写一篇“复盘”。harness 要在关键关口自动留下决策台账，至少包括当时的问题、考虑过的方案、最后的选择、选择理由、验证证据和复查条件。阶段结束时，再把有效内容收紧成一份交接包。完整聊天记录不能代替它。
 
