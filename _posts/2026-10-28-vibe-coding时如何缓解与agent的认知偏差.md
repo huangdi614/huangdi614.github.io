@@ -29,7 +29,7 @@ Agent 说“完成了”，代码也跑起来了，人很容易先松一口气�
 
 大 Diff 会让人扫一眼就点通过，大 Spec 更危险。代码至少还有编译器和测试，Spec 里的错误前提看起来却可以非常合理。等它被执行成代码，才发现权限模型不对、兼容范围漏了，或者一个“可选”功能根本不能失败。
 
-这个问题不只是读得慢。Mitchell、Ghosh 和 Passi 在[《AI Agents Push Humans Out of the Loop》](../external-sources/ai-agents-push-humans-out-of-the-loop.md)这篇立场论文中认为，Agent 的输出密集、分散而且变化很快，人很难一边跟进计划，一边检查每个工具调用和参数。持续审批还会带来 approval fatigue。人只有能独立看清回路里的状态，human-in-the-loop 才有意义；否则名义上坐在回路里，实际已经失去了观察和干预能力。
+这个问题不只是读得慢。Mitchell、Ghosh 和 Passi 在[《AI Agents Push Humans Out of the Loop》](https://arxiv.org/abs/2608.23642v3)这篇立场论文中认为，Agent 的输出密集、分散而且变化很快，人很难一边跟进计划，一边检查每个工具调用和参数。持续审批还会带来 approval fatigue。人只有能独立看清回路里的状态，human-in-the-loop 才有意义；否则名义上坐在回路里，实际已经失去了观察和干预能力。
 
 更麻烦的是反馈环。如果系统把快速批准率当成成功信号，它会被激励去生成更流畅、更容易扫读、摩擦更小的方案。人越看不清，批准反而越容易发生。
 
@@ -67,11 +67,11 @@ Spec 的写作可以交给 Agent，Spec 的判断不能。要让审阅真的发�
 - 新任务开始前，先读项目地图、当前 Spec 和上一轮 note。
 ```
 
-[AGENTS.md 官方格式](../external-sources/agents-md-official-format.md)把它定位成“给 Agent 的 README”。[OpenAI Codex 的官方文档](../external-sources/openai-codex-agents-md.md)进一步说明了加载顺序：Codex 从全局和项目路径构建 instruction chain，目录越近的规则越靠后，并覆盖更早的指导；所有文件合并后默认受 32 KiB 上限约束，超出时官方建议拆分到嵌套目录或提高上限。
+[AGENTS.md 官方格式](https://agents.md/)把它定位成“给 Agent 的 README”。[OpenAI Codex 的官方文档](https://learn.chatgpt.com/docs/agent-configuration/agents-md)进一步说明了加载顺序：Codex 从全局和项目路径构建 instruction chain，目录越近的规则越靠后，并覆盖更早的指导；所有文件合并后默认受 32 KiB 上限约束，超出时官方建议拆分到嵌套目录或提高上限。
 
 按这个机制，入口只该放项目概览、执行命令、真正全局的硬约束和阅读路由；具体格式、图表示例和领域规范按任务按需加载。
 
-长上下文也不会因为窗口够大就被完整利用。[《Lost in the Middle》](../external-sources/lost-in-the-middle.md)在两类检索任务中发现，相关信息出现在开头或结尾时，模型通常表现更好；落在长上下文中间时，表现会明显下降。所以重要规则要靠近开头或结尾，剩下的细节拆出去。把几百行内容塞进入口，效果不是 Agent 看得更多，而是容易把真正重要的规则埋掉。
+长上下文也不会因为窗口够大就被完整利用。[《Lost in the Middle》](https://arxiv.org/abs/2307.03172v3)在两类检索任务中发现，相关信息出现在开头或结尾时，模型通常表现更好；落在长上下文中间时，表现会明显下降。所以重要规则要靠近开头或结尾，剩下的细节拆出去。把几百行内容塞进入口，效果不是 Agent 看得更多，而是容易把真正重要的规则埋掉。
 
 ## 二、真正的隐性知识，正在从执行过程中长出来
 
@@ -121,13 +121,13 @@ flowchart LR
 
 新的 Agent 开始工作前，先读项目地图、当前 Spec 和相关 Note，再读代码。人需要做设计审阅时先打开 HTML artifact。两种输入面对两类读者：Agent 拿结构化上下文，人拿低认知负担的可视化说明。
 
-Anthropic 的[《Effective harnesses for long-running agents》](../external-sources/anthropic-effective-harnesses-for-long-running-agents.md)把长任务比作工程师轮班：每个新会话都没有上一班的记忆，单靠 compaction 也不一定能把事情交接清楚。它的做法是让 Agent 用进度文件、功能清单和 git 历史重建状态，再在每个会话结束时留下可恢复的成果。
+Anthropic 的[《Effective harnesses for long-running agents》](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)把长任务比作工程师轮班：每个新会话都没有上一班的记忆，单靠 compaction 也不一定能把事情交接清楚。它的做法是让 Agent 用进度文件、功能清单和 git 历史重建状态，再在每个会话结束时留下可恢复的成果。
 
-[《Harness design for long-running application development》](../external-sources/anthropic-harness-design-long-running-apps.md)又往前走了一步：生成者和评估者在写代码前协商 sprint contract，并通过文件读写来传递判断。日志、追踪和错误上下文只能回答系统实际做了什么；Spec、decision、note 和验收证据才能回答为什么这样做、当时发生了什么。只看其中一边，依然会掉进猜测。
+[《Harness design for long-running application development》](https://www.anthropic.com/engineering/harness-design-long-running-apps)又往前走了一步：生成者和评估者在写代码前协商 sprint contract，并通过文件读写来传递判断。日志、追踪和错误上下文只能回答系统实际做了什么；Spec、decision、note 和验收证据才能回答为什么这样做、当时发生了什么。只看其中一边，依然会掉进猜测。
 
 因此，记录不能依赖 Agent 事后写一篇“复盘”。harness 要在关键关口自动留下决策台账，至少包括当时的问题、考虑过的方案、最后的选择、选择理由、验证证据和复查条件。阶段结束时，再把有效内容收紧成一份交接包。完整聊天记录不能代替它。
 
-[Addy Osmani 的 Loop Engineering](../external-sources/addy-osmani-loop-engineering.md)把这种代价归成三件事：验证仍然在人身上，理解会在不读代码时腐烂，人也会因为 loop 跑得顺而进入认知投降。把 Agent 每轮积累上下文造成的成本单列，就成了前文说的四种沉默成本。Anthropic 的官方 harness 文章则把上下文处理落到 compaction 或带结构化交接的 context reset 上。
+[Addy Osmani 的 Loop Engineering](https://addyosmani.com/blog/loop-engineering/)把这种代价归成三件事：验证仍然在人身上，理解会在不读代码时腐烂，人也会因为 loop 跑得顺而进入认知投降。把 Agent 每轮积累上下文造成的成本单列，就成了前文说的四种沉默成本。Anthropic 的官方 harness 文章则把上下文处理落到 compaction 或带结构化交接的 context reset 上。
 
 Spec 审阅变粗，会累积验证负债；人不再理解实现，问题会变成理解腐烂；最后只负责点接受，就是认知投降；而每轮都把旧历史重新塞回去，又会让过时判断继续制造噪声。
 
@@ -135,7 +135,7 @@ Spec 审阅变粗，会累积验证负债；人不再理解实现，问题会变
 
 如果把研发过程也看成驾驶，我同意方向：Agent 会从辅助驾驶走向自动研发。变化不会靠某天切一个总开关完成，更可能按任务、风险和可回滚程度逐级放开。
 
-Feng、McDonald 和 Zhang 在[《Levels of Autonomy for AI Agents》](../external-sources/levels-of-autonomy-for-ai-agents.md)里把自主性当作独立的设计决定，而不是模型能力越高就自动进入更高等级。他们按用户承担的角色划出五级：
+Feng、McDonald 和 Zhang 在[《Levels of Autonomy for AI Agents》](https://arxiv.org/abs/2506.12469v2)里把自主性当作独立的设计决定，而不是模型能力越高就自动进入更高等级。他们按用户承担的角色划出五级：
 
 | 等级 | 用户角色 | 研发场景里的样子 | 人还保留什么 |
 | --- | --- | --- | --- |
