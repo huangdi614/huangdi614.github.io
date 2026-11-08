@@ -105,7 +105,9 @@ Anthropic 的[《Effective harnesses for long-running agents》](../external-sou
 
 因此，记录不能依赖 Agent 事后写一篇“复盘”。harness 要在关键关口自动留下决策台账，至少包括当时的问题、考虑过的方案、最后的选择、选择理由、验证证据和复查条件。阶段结束时，再把有效内容收紧成一份交接包。完整聊天记录不能代替它。
 
-[《第十三讲. 四种沉默成本》](../external-sources/lecture-13-four-silent-costs.md)讲的也是这件事的代价。Spec 审阅变粗，会累积验证负债；人不再理解实现，问题会变成理解腐烂；最后只负责点接受，就是认知投降；而每轮都把旧历史重新塞回去，又会让过时判断继续制造噪声。
+[Addy Osmani 的 Loop Engineering](../external-sources/addy-osmani-loop-engineering.md)把这种代价归成三件事：验证仍然在人身上，理解会在不读代码时腐烂，人也会因为 loop 跑得顺而进入认知投降。把 Agent 每轮积累上下文造成的成本单列，就成了前文说的四种沉默成本。Anthropic 的官方 harness 文章则把上下文处理落到 compaction 或带结构化交接的 context reset 上。
+
+Spec 审阅变粗，会累积验证负债；人不再理解实现，问题会变成理解腐烂；最后只负责点接受，就是认知投降；而每轮都把旧历史重新塞回去，又会让过时判断继续制造噪声。
 
 ## 三、从副驾到全自动，研发会像自动驾驶一样逐级放开
 
